@@ -460,8 +460,7 @@
                     return;
                 }
 
-                const posicionVacia =
-                    tablero.indexOf(0);
+                const posicionVacia = tablero.indexOf(0);
 
                 tablero[posicionVacia] = tablero[posicion];
 
@@ -492,8 +491,7 @@
 
                 for (let i = 0; i < 200; i++) {
 
-                    const posicionVacia =
-                        tablero.indexOf(0);
+                    const posicionVacia = tablero.indexOf(0);
 
                     const movimientosPosibles = [];
 
@@ -513,24 +511,16 @@
 
                     }
 
-                    const posicionAleatoria =
-                        movimientosPosibles[
-                            Math.floor(
-                                Math.random() *
-                                movimientosPosibles.length
-                            )
-                        ];
+                    const posicionAleatoria = movimientosPosibles[ Math.floor( Math.random() * movimientosPosibles.length ) ];
 
-                    tablero[posicionVacia] =
-                        tablero[posicionAleatoria];
+                    tablero[posicionVacia] = tablero[posicionAleatoria];
 
                     tablero[posicionAleatoria] = 0;
                 }
 
                 movimientos = 0;
 
-                contadorMovimientos.textContent =
-                    movimientos;
+                contadorMovimientos.textContent = movimientos;
 
                 mostrarTablero();
             }
@@ -543,8 +533,7 @@
 
             jugarDeNuevo.addEventListener('click', () => {
 
-                pantallaVictoria.style.display =
-                    'none';
+                pantallaVictoria.style.display = 'none';
 
                 reiniciarPuzzle();
 
@@ -563,8 +552,7 @@
 
                 movimientos = 0;
 
-                contadorMovimientos.textContent =
-                    movimientos;
+                contadorMovimientos.textContent = movimientos;
 
                 mostrarTablero();
             }
