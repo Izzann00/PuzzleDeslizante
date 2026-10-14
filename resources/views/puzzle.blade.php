@@ -366,19 +366,12 @@
         <script>
 
             const puzzle = document.getElementById('puzzle');
-
             const piezas = document.querySelectorAll('.pieza');
-
             const botonMezclar = document.getElementById('mezclar');
-
             const contadorMovimientos = document.getElementById('movimientos');
-
             const pantallaVictoria = document.getElementById('victoria');
-
             const resultadoMovimientos = document.getElementById('resultadoMovimientos');
-
             const jugarDeNuevo = document.getElementById('jugarDeNuevo');
-
 
             let tablero = [
                 1, 2, 3, 4,
@@ -389,73 +382,49 @@
 
             let movimientos = 0;
 
-
             function mostrarTablero() {
-
                 piezas.forEach((pieza, index) => {
-
                     const numeroPieza = tablero[index];
 
                     pieza.classList.remove(
-                        'pieza-1',
-                        'pieza-2',
-                        'pieza-3',
-                        'pieza-4',
-                        'pieza-5',
-                        'pieza-6',
-                        'pieza-7',
-                        'pieza-8',
-                        'pieza-9',
-                        'pieza-10',
-                        'pieza-11',
-                        'pieza-12',
-                        'pieza-13',
-                        'pieza-14',
-                        'pieza-15',
+                        'pieza-1', 'pieza-2', 'pieza-3',
+                        'pieza-4', 'pieza-5', 'pieza-6',
+                        'pieza-7', 'pieza-8', 'pieza-9',
+                        'pieza-10', 'pieza-11', 'pieza-12',
+                        'pieza-13', 'pieza-14', 'pieza-15',
                         'vacia'
                     );
 
                     if (numeroPieza === 0) {
-
                         pieza.classList.add('vacia');
-
                     } else {
-
-                        pieza.classList.add(
-                            'pieza-' + numeroPieza
-                        );
-
+                        pieza.classList.add('pieza-' + numeroPieza);
                     }
-
                 });
             }
 
             function puedeMover(posicion) {
-
                 const posicionVacia = tablero.indexOf(0);
 
                 const filaPieza = Math.floor(posicion / 4);
-
                 const columnaPieza = posicion % 4;
 
                 const filaVacia = Math.floor(posicionVacia / 4);
-
                 const columnaVacia = posicionVacia % 4;
 
                 const mismaFila = filaPieza === filaVacia;
-
                 const mismaColumna = columnaPieza === columnaVacia;
 
-                const cercaHorizontal = mismaFila && Math.abs( columnaPieza - columnaVacia ) === 1;
+                const cercaHorizontal =
+                    mismaFila && Math.abs(columnaPieza - columnaVacia) === 1;
 
-                const cercaVertical = mismaColumna && Math.abs( filaPieza - filaVacia ) === 1;
+                const cercaVertical =
+                    mismaColumna && Math.abs(filaPieza - filaVacia) === 1;
 
                 return cercaHorizontal || cercaVertical;
             }
 
-
             function moverPieza(posicion) {
-
                 if (!puedeMover(posicion)) {
                     return;
                 }
@@ -463,7 +432,6 @@
                 const posicionVacia = tablero.indexOf(0);
 
                 tablero[posicionVacia] = tablero[posicion];
-
                 tablero[posicion] = 0;
 
                 movimientos++;
@@ -471,78 +439,53 @@
                 contadorMovimientos.textContent = movimientos;
 
                 mostrarTablero();
-
                 comprobarVictoria();
             }
 
-
             piezas.forEach((pieza, index) => {
-
                 pieza.addEventListener('click', () => {
-
                     moverPieza(index);
-
                 });
-
             });
 
-
             function mezclarPuzzle() {
-
                 for (let i = 0; i < 200; i++) {
-
                     const posicionVacia = tablero.indexOf(0);
-
                     const movimientosPosibles = [];
 
-                    for (
-                        let posicion = 0;
-                        posicion < 16;
-                        posicion++
-                    ) {
-
+                    for (let posicion = 0; posicion < 16; posicion++) {
                         if (puedeMover(posicion)) {
-
-                            movimientosPosibles.push(
-                                posicion
-                            );
-
+                            movimientosPosibles.push(posicion);
                         }
-
                     }
 
-                    const posicionAleatoria = movimientosPosibles[ Math.floor( Math.random() * movimientosPosibles.length ) ];
+                    const posicionAleatoria =
+                        movimientosPosibles[
+                            Math.floor(Math.random() * movimientosPosibles.length)
+                        ];
 
                     tablero[posicionVacia] = tablero[posicionAleatoria];
-
                     tablero[posicionAleatoria] = 0;
                 }
 
                 movimientos = 0;
-
                 contadorMovimientos.textContent = movimientos;
 
                 mostrarTablero();
             }
 
             botonMezclar.addEventListener('click', () => {
-
+                pantallaVictoria.style.display = 'none';
                 mezclarPuzzle();
-
             });
 
             jugarDeNuevo.addEventListener('click', () => {
-
                 pantallaVictoria.style.display = 'none';
-
                 reiniciarPuzzle();
-
                 mezclarPuzzle();
-
             });
 
             function reiniciarPuzzle() {
-
                 tablero = [
                     1, 2, 3, 4,
                     5, 6, 7, 8,
@@ -551,14 +494,12 @@
                 ];
 
                 movimientos = 0;
-
                 contadorMovimientos.textContent = movimientos;
 
                 mostrarTablero();
             }
 
             function comprobarVictoria() {
-
                 const tableroCorrecto = [
                     1, 2, 3, 4,
                     5, 6, 7, 8,
@@ -567,17 +508,17 @@
                 ];
 
                 if (
-                    tablero.every( (valor, index) => valor === tableroCorrecto[index] )
+                    tablero.every(
+                        (valor, index) => valor === tableroCorrecto[index]
+                    )
                 ) {
                     resultadoMovimientos.textContent = movimientos;
-
                     pantallaVictoria.style.display = 'flex';
                 }
             }
 
-            mezclarPuzzle();
+            mostrarTablero();
 
         </script>
-
     </body>
 </html>
