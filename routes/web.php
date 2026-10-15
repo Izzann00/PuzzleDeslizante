@@ -2,6 +2,5 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('puzzle');
+Route::get('/', function () { return view('puzzle'); 
 });
